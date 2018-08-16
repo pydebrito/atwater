@@ -189,9 +189,10 @@ ALTER SEARCH INDEX SCHEMA ON stores
 RELOAD  SEARCH INDEX ON stores;
 REBUILD SEARCH INDEX ON stores;
 
+SELECT * FROM stores WHERE solr_query='{ "q" : "*:*", "fq" : "{!geofilt pt=38.86,-106.21 sfield=latlong d=10000}" }';
 
+DROP SEARCH INDEX ON products;
 CREATE SEARCH INDEX ON products WITH COLUMNS * { excluded : true };
-//DROP SEARCH INDEX ON products;
 
 ALTER SEARCH INDEX SCHEMA ON products
    ADD types.fieldType[@name='TextField_phonetic',
